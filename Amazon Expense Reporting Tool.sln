@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amazon Expense Reporting Tool", "Amazon Expense Reporting Tool.csproj", "{602F2225-879A-4577-9793-83D67E8C9449}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{602F2225-879A-4577-9793-83D67E8C9449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602F2225-879A-4577-9793-83D67E8C9449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602F2225-879A-4577-9793-83D67E8C9449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602F2225-879A-4577-9793-83D67E8C9449}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5DCC14D-344B-4B74-8306-A540A63866DB}
+	EndGlobalSection
+EndGlobal
