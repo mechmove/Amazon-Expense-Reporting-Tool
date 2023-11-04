@@ -16,7 +16,7 @@ namespace Amazon_Expenses_Reporting_tool
             using (var fileStream = File.OpenRead(SourceFln))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
             {
-                Boolean bFlag = false;
+                Boolean bGiftCard = false;
                 String line = String.Empty;
                 string currentdate = string.Empty;
                 int LineCtr = 0;
@@ -33,7 +33,17 @@ namespace Amazon_Expenses_Reporting_tool
                         //money only
                         line = line.Replace(",", "").Trim() + ",";
                         BuildLine_MoneyOnlyCSV += line;
-                        PayAmt = BuildLine_MoneyOnlyCSV.Substring(BuildLine_MoneyOnlyCSV.IndexOf("-$") + 2);
+
+                        if (BuildLine_MoneyOnlyCSV.IndexOf("-$")>0)
+                        {
+                            PayAmt = BuildLine_MoneyOnlyCSV.Substring(BuildLine_MoneyOnlyCSV.IndexOf("-$") + 2);
+                        }
+
+                        if (BuildLine_MoneyOnlyCSV.IndexOf("+$") > 0)
+                        {
+                            PayAmt = "-" + BuildLine_MoneyOnlyCSV.Substring(BuildLine_MoneyOnlyCSV.IndexOf("+$") + 2);
+                        }
+
                         BuildLine_MoneyOnlyCSV += PayAmt;
                         MoneyOnlyCSV += BuildLine_MoneyOnlyCSV.Substring(0, BuildLine_MoneyOnlyCSV.Length) + Environment.NewLine;
                         BuildLine_MoneyOnlyCSV = string.Empty;
@@ -62,14 +72,14 @@ namespace Amazon_Expenses_Reporting_tool
                         if (LineCtr.Equals(2) && (line.Contains("Amazon Gift Card used")))
                         {
                             LineCtr = 3;
-                            bFlag = true;
+                            bGiftCard = true;
                         }
                         else if (LineCtr.Equals(4))
                         {
-                            if (bFlag)
+                            if (bGiftCard)
                             {
-                                bFlag = false;
-                                BuildLine_CompleteCSV += "," + PayAmt + Environment.NewLine;
+                                bGiftCard = false;
+                                BuildLine_CompleteCSV += ",-" + PayAmt + Environment.NewLine;
                             }
                             else
                             {
