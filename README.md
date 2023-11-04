@@ -8,5 +8,6 @@ There is no GUI.
 If you find an on-line report, please let me know, many times I end up writing stuff that is redundant and unnecessary, but it keeps my programming skills going.
 
 # Important notes:
-# 11/4/2023 The basic sequential structure is date, amount, order number, then vendor. Transactions earlier than 07/28/2020 omits vendor. In those cases, I just key-in "placeholder vendor" as to not have to accomodate an older format. The available transactions is limited, so downlod and save this info every year!
-# 11/3/2023 Project creation
+\n11/4/2023 The basic sequential structure is date, amount, order number, then vendor. Transactions earlier than 07/28/2020 omits vendor. In those cases, I just key-in "placeholder vendor" as to not have to accomodate an older format. The available transactions is limited, so downlod and save this info every year!
+
+\n11/3/2023 Project creation
