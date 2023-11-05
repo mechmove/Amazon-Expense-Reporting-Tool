@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 using System.Text;
 
 namespace Amazon_Expenses_Reporting_tool
@@ -10,7 +8,6 @@ namespace Amazon_Expenses_Reporting_tool
         static void Main(string[] args)
         {
             string SourceFln = "screen scrape, Amazon Orders.txt";
-            string TargetMoneyOnly = "AmazonMoneyOnly.csv";
             string TargetCompleteCSV = "AmazonComplete.csv";
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(SourceFln))
@@ -20,10 +17,8 @@ namespace Amazon_Expenses_Reporting_tool
                 String line = String.Empty;
                 string currentdate = string.Empty;
                 int LineCtr = 0;
-                string BuildLine_MoneyOnlyCSV = "desc,payment" + Environment.NewLine;
                 string PayAmt = string.Empty;
                 string BuildLine_CompleteCSV = "date,payment,ordernum,vendor,pay amount" + Environment.NewLine;
-                string MoneyOnlyCSV = string.Empty;
                 while ((line = streamReader.ReadLine())
                     != null)
                 {
@@ -32,21 +27,16 @@ namespace Amazon_Expenses_Reporting_tool
                     {
                         //money only
                         line = line.Replace(",", "").Trim() + ",";
-                        BuildLine_MoneyOnlyCSV += line;
 
-                        if (BuildLine_MoneyOnlyCSV.IndexOf("-$")>0)
+                        if (line.IndexOf("-$")>0)
                         {
-                            PayAmt = BuildLine_MoneyOnlyCSV.Substring(BuildLine_MoneyOnlyCSV.IndexOf("-$") + 2);
+                            PayAmt = line.Substring(line.IndexOf("-$") + 2);
                         }
 
-                        if (BuildLine_MoneyOnlyCSV.IndexOf("+$") > 0)
+                        if (line.IndexOf("+$") > 0)
                         {
-                            PayAmt = "-" + BuildLine_MoneyOnlyCSV.Substring(BuildLine_MoneyOnlyCSV.IndexOf("+$") + 2);
+                            PayAmt = "-" + line.Substring(line.IndexOf("+$") + 2);
                         }
-
-                        BuildLine_MoneyOnlyCSV += PayAmt;
-                        MoneyOnlyCSV += BuildLine_MoneyOnlyCSV.Substring(0, BuildLine_MoneyOnlyCSV.Length) + Environment.NewLine;
-                        BuildLine_MoneyOnlyCSV = string.Empty;
                     }
 
                     // full report
@@ -62,7 +52,6 @@ namespace Amazon_Expenses_Reporting_tool
                         if (LineCtr.Equals(4))
                         {
                             LineCtr = 1;
-                            //BuildLine_CompleteCSV += "no date" + ",";
                             BuildLine_CompleteCSV += currentdate + ",";
                         }
 
@@ -85,12 +74,10 @@ namespace Amazon_Expenses_Reporting_tool
                             {
                                 BuildLine_CompleteCSV += PayAmt + Environment.NewLine;
                             }
-
                         }
                     }
                 }
                 File.WriteAllText(TargetCompleteCSV, BuildLine_CompleteCSV.Substring(0, BuildLine_CompleteCSV.Length) + Environment.NewLine);
-                File.WriteAllText(TargetMoneyOnly, MoneyOnlyCSV);
 
                 Console.Write(TargetCompleteCSV + " created!");
                 Console.ReadKey();
