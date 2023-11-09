@@ -6,3 +6,7 @@ Ever wondered how much money you are spending on Amazon Prime? Easy, just go to 
 11/4/2023 The basic sequential structure is date, amount, order number, and vendor. Transactions earlier than 07/28/2020 omits vendor. In those cases, I just key-in "placeholder vendor" as to not have to accomodate an older format. The available transactions are limited, so download and save your transactions every year!
 
 11/3/2023 Project creation
+
+# Disclaimer:
+
+I am not an employee of Amazon, nor is this program endorsed by Amazon or any of Amazon's affiliates. 
